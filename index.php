@@ -30,21 +30,36 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="8"></li>
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="https://source.unsplash.com/1600x600/?Education,Computer"
+                <img class="d-block w-100" src="Images/6.jpg"
                     alt="First slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="https://source.unsplash.com/1600x600/?teach,learn" alt="Second slide">
+                <img class="d-block w-100" src="Images/19.jpg" alt="Second slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="https://source.unsplash.com/1600x600/?Coding,Computer"
+                <img class="d-block w-100" src="Images/18.jpg"
                     alt="Third slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="https://source.unsplash.com/1600x600/?Coding,Science" alt="Third slide">
+                <img class="d-block w-100" src="Images/8.jpg" alt="Fourth slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="Images/17.jpg" alt="Fifth slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="Images/12.jpg" alt="Sixth slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="Images/11.jpg" alt="Seventh slide">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
