@@ -13,7 +13,7 @@
     <title>MY Forum</title>
 </head>
 
-<body>
+<body style="background-color:#002130;">
     <?php
   include "Compo/Header.php";
   include "Compo/DbConnect.php";
@@ -25,41 +25,32 @@
 
 
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="8"></li>
-        </ol>
-        <div class="carousel-inner">
+    <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
+        <div class="carousel-inner ">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="Images/6.jpg"
-                    alt="First slide">
+                <img class="d-block w-100" src="Images/ju.jpg" height="550rem">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="Images/19.jpg" alt="Second slide">
+                <img class="d-block w-100" src="Images/19.jpg" height="550rem">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="Images/18.jpg"
-                    alt="Third slide">
+                <img class="d-block w-100" src="Images/ui.jpg" height="550rem">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="Images/8.jpg" alt="Fourth slide">
+                <img class="d-block w-100" src="Images/op.jpg" height="550rem">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="Images/17.jpg" alt="Fifth slide">
+                <img class="d-block w-100" src="Images/16.jpg" height="550rem">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="Images/12.jpg" alt="Sixth slide">
+                <img class="d-block w-100" src="Images/12.jpg" height="550rem">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="Images/11.jpg" alt="Seventh slide">
+                <img class="d-block w-100" src="Images/9.jpg" height="550rem">
+            </div>
+
+            <div class="carousel-item">
+                <img class="d-block w-100" src="Images/11.jpg" height="550rem">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -78,41 +69,34 @@
 
 
     <div class="container">
-        <h2 class="text-center my-3"> Welcome To Forum </h2>
+        <h2 class="text-center my-3 text-warning"> Welcome To Forum </h2>
 
         <div class="row">
 
-<!-- FetCh ALl the categories -->
-      <?php             
+            <!-- FetCh ALl the categories -->
+            <?php             
       $sql="SELECT * FROM `categories`";
       $result=mysqli_query($conn,$sql);
       while($row=mysqli_fetch_assoc($result)){
         $CatName= $row['CategoryName'];
         $CatDesc= $row['Description'];
+        $ID= $row['CategoryId'];
 
         echo '   <div class="col-md-4">
-        <div class="card my-3" style="width: 18rem; height: 31rem">
-            <img class="card-img-top" src="https://source.unsplash.com/450x400/?'.$CatName .' "
-                alt="Card image cap">
+        <div class="card mt-3 mb-5" style="width: 18rem; height: 31rem">
+            <img class="card-img-top" src="Images/Card'.$ID.'.jpg" height="236px">
             <div class="card-body my-3">
-                <h5 class="card-title">'.$CatName .'</h5>
+                <h5 class="card-title"> <a href="ThreadsList.php? Catid='. $ID .'">'.$CatName .' </a> </h5>
                 <p class="card-text">
                 '. substr($CatDesc,0,100) .'......</p>
-                <a href="#" class="btn btn-primary">View Threads</a>
+                <a href="Threadslist.php? Catid='. $ID .'" class="btn btn-primary">View Threads</a>
             </div>
         </div>
 
-    </div> <!-- col-md ka div -->
-';
-
+    </div> <!-- col-md ka div -->';
       }
-
-      ?>
-            <!-- Here we use for loop to iterate the categories  -->
-         
-         
-
-        </div>
+?>
+</div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -18,35 +18,72 @@
   include "Compo/Header.php";
   include "Compo/DbConnect.php";
   ?>
+    <?php
+    $id=$_GET['ThreadId'];
+$sql= "SELECT * FROM `threads` WHERE `ThreadId` = $id";
+$result=mysqli_query($conn,$sql);    
+
+while($row=mysqli_fetch_assoc($result))
+{
+$Title= $row['ThreadTitle'];
+$Description= $row['ThreadDesc'];
+
+}
+?>
+
 
     <div class="container my-4">
 
+        <!-- 
+        <div class="jumbotron">
+            <h1 class="display-4"><?php echo $Title; ?> Forum</h1>
+            <p class="lead"><?php echo $Description;  ?></p>
+            <hr class="my-4">
+
+
+            <p class="lead">
+                <a class="btn btn-success btn-lg" href="#" role="button">Learn more</a>
+            </p>
+        </div> -->
+
 
         <div class="jumbotron">
-            <h1 class="display-4">Welcome to Python Forum</h1>
-            <p class="lead">Python is an interpreted, high-level, general-purpose programming language.
-                Created by Guido van Rossum and first released in 1991, Python's design philosophy emphasizes code
-                readability with its notable use of significant whitespace.</p>
+            <h1 class="display-4"> <?php echo $Title; ?> Forum</h1>
+            <p class="lead"><?php echo $Description;  ?></p>
             <hr class="my-4">
-            <p> Best Place For sharing and enhancing your Knowledge</p>
+            <p> Best Place For sharing and enhancing your Knowledge <br></p>
+            <h3> Forum rules</h3> <br>
+            <p>No Spam / Advertising / Self-promote in the forums.
+                Do not cross post questions.
+                Remain respectful of other members at all times. </p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                <p> <b> Posted by: ME </b> </p>
             </p>
         </div>
 
     </div>
     <div class="container">
 
-        <H1 class="my-6rem"> Browse Questions </H1>
+        <H1 class="my-6rem"> Discussions </H1>
+        <?php
+//     $CatId=$_GET['Catid'];
+// $sql= "SELECT * FROM `threads` WHERE `ThreadCatId` = $CatId";
+// $result=mysqli_query($conn,$sql);    
 
-        <div class="media my-4">
-  <img class="mr-3" src="Images/user.png" alt="Generic placeholder image">
-  <div class="media-body">
-    <h5 class="mt-0">Media heading</h5>
-    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-  </div>
-</div>
+// while($row=mysqli_fetch_assoc($result))
+// {
+// $Title= $row['ThreadTitle'];
+// $Desc= $row['ThreadDesc'];
+// $Id=$row['ThreadId'];
 
+// echo '       <div class="media my-4">
+//             <img class="mr-3 my-4" src="Images/user.png" width="80px" Height="80px" alt="Generic placeholder image">
+//             <div class="media-body my-4">
+//                 <h5 class="mt-0"> <a href="Threads.php?ThreadId='.$Id.'">'.$Title.'</a></h5> 
+//                 '.$Desc.'
+        
+//             </div>
+//         </div>'; } ?>
 
 
 
