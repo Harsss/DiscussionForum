@@ -13,7 +13,7 @@
     <title>MY Forum</title>
 </head>
 
-<body>
+<body style="background-color:#002130;">
     <?php
   include "Compo/Header.php";
   include "Compo/DbConnect.php";
@@ -30,11 +30,32 @@ $CatDesc= $row['Description'];
 
 }
 ?>
+    <?php
 
+$showAlert =FALSE;
+$method=$_SERVER['REQUEST_METHOD'];
+
+if($method=='POST')
+{
+    
+ $ThTitle=$_POST['ProblemTitle'];
+ $ThDesc=$_POST['Description'];
+
+$sql= "INSERT INTO `threads` ( `ThreadTitle`, `ThreadDesc`, `ThreadCatId`, `ThreadUserId`, `Dt`) VALUES 
+( '$ThTitle', ' $ThDesc', '$id', '0', CURRENT_TIMESTAMP);";
+$result=mysqli_query($conn,$sql);
+$showAlert =True;
+if($showAlert)
+{  echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Congrats</strong> Your question has been added, Please wait commodity to respond
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>'; }
+}
+?>
 
     <div class="container my-4">
-
-
         <div class="jumbotron text-light" style="background-color:#333333;">
             <h1 class="display-4 ">Welcome to <?php echo $CatName; ?> Forum</h1>
             <p class="lead "><?php echo $CatDesc;  ?></p>
@@ -48,16 +69,14 @@ $CatDesc= $row['Description'];
                 <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
             </p>
         </div>
-
     </div>
     <hr>
-    <div class="container my-5">
+    <div class="container my-5 text-light">
 
-    
-    <center>
+        <center>
             <H1 class="my-6rem"> Start a New Discussion </H1>
         </center>
-        <form>
+        <form action="<?php echo $_SERVER['REQUEST_URI']  ?>" method="post">
             <div class="form-group ">
                 <label for="ProblemTitle">Question Title </label>
                 <input type="Text" class="form-control" id="ProblemTitle" name="ProblemTitle"
@@ -69,14 +88,14 @@ $CatDesc= $row['Description'];
                 <label for="Description">Elaborate Your Concern</label>
                 <textarea class="form-control" id="Description" name="Description" rows="6"></textarea>
             </div>
-            
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 
 
-<hr>
-    <div class="container">
+    <hr>
+    <div class="container text-light">
 
         <center>
             <H1 class="my-6rem"> Browse Questions </H1>
@@ -95,10 +114,12 @@ while($row=mysqli_fetch_assoc($result))
 $Title= $row['ThreadTitle'];
 $Desc= $row['ThreadDesc'];
 $Id=$row['ThreadId'];
+$Time=$row['Dt'];
 
 echo '       <div class="media my-4">
             <img class="mr-3 my-4" src="Images/user.png" width="80px" Height="80px" alt="Generic placeholder image">
             <div class="media-body my-4">
+            <p class="font-weight-bold my-0"> Anonymous User at '.$Time.' </p>
                 <h5 class="mt-0"> <a href="Threads.php?ThreadId='.$Id.'">'.$Title.'</a></h5> 
                 '.$Desc.'
         
@@ -113,11 +134,7 @@ echo '       <div class="media my-4">
     <h1 class="display-4">No results Found</h1>
     <p class="lead">Be the first one to explore the topic</p>
   </div>
-</div>
-            
-            
-            
-             '; }
+</div>'; }
 
 
 
