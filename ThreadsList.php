@@ -71,12 +71,17 @@ if($showAlert)
         </div>
     </div>
     <hr>
-    <div class="container my-5 text-light">
 
-        <center>
+<?php
+     
+     
+     
+     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true){
+  echo  '<div class="container my-5 text-light">
+   <center>
             <H1 class="my-6rem"> Start a New Discussion </H1>
         </center>
-        <form action="<?php echo $_SERVER['REQUEST_URI']  ?>" method="post">
+        <form action='.$_SERVER["REQUEST_URI"].'  method="post">
             <div class="form-group ">
                 <label for="ProblemTitle">Question Title </label>
                 <input type="Text" class="form-control" id="ProblemTitle" name="ProblemTitle"
@@ -91,13 +96,19 @@ if($showAlert)
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-    </div>
-
-
-    <hr>
+    </div>';}
+    else{
+       echo '<div class="container my-5 text-light">
+       <center>
+                <H1 class="my-6rem"> Start a New Discussion </H1>
+            
+            <h3 class="text-light my-5">You are not log in </h3> </center> </div>';
+       
+    }
+?>
+<hr>
     <div class="container text-light">
-
-        <center>
+ <center>
             <H1 class="my-6rem"> Browse Questions </H1>
         </center>
         <?php

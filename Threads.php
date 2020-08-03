@@ -85,12 +85,15 @@ if($showAlert)
 
 
 
-    <div class="container my-5">
+ <?php 
+    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true){
+        echo  'echo 
+        <div class="container my-5">
 
         <center>
             <H1 class="my-6rem"> Post Your Comment </H1>
         </center>
-        <form action="<?php echo $_SERVER['REQUEST_URI']  ?>" method="post">
+        <form action="'.$_SERVER["REQUEST_URI"].' " method="post">
 
 
             <div class="form-group">
@@ -100,7 +103,19 @@ if($showAlert)
 
             <button type="submit" class="btn btn-success">Submit</button>
         </form>
-    </div>
+    </div>';
+}
+          else{
+             echo '<div class="container my-5 t">
+             <center>
+                      <H1 class="my-6rem"> Post Your Comment </H1>
+                  
+                  <h3 class="text-light my-5">You are not log in </h3> </center> </div>';
+             
+          }
+    
+    
+    ?>
     <div class="container">
 
         <H1 class="my-6rem"> Discussions </H1>

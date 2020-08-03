@@ -8,29 +8,31 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        </div><form>
+        </div>
+        
+        <form action="/Forum/Compo/HandleSignUp.php" method="post">
             <div class="modal-body">
                 
                     <div class="form-group">
                     
                     <div class="form-group">
                         <label for="Name">Name</label>
-                        <input type="text" class="form-control" id="Name" placeholder="Name">
+                        <input type="text" class="form-control" id="Name" name="UserName" placeholder="Name">
                     </div>
                     
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        <label for="SignUpEmail">Email address</label>
+                        <input type="email" class="form-control" id="SignUpEmail" name="SignUpEmail" aria-describedby="emailHelp"
                             placeholder="Enter email">
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                             else.</small>
                     </div>
                     <div class="form-group">
                         <label for="Password">Password</label>
-                        <input type="password" class="form-control" id="Password1" placeholder="Password">
+                        <input type="password" class="form-control" id="Password" name="Password" placeholder="Password">
                     </div>
                     <div class="form-group">
-                        <label for="ConfirmPassword1">Confirm Password</label>
-                        <input type="password" class="form-control" id="ConfirmPassword1" placeholder="Password">
+                        <label for="ConfirmPassword">Confirm Password</label>
+                        <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" placeholder="Password">
                     </div>
                     
                     <button type="submit" class="btn btn-primary">SignUp</button>
