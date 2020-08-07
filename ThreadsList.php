@@ -14,9 +14,9 @@
 </head>
 
 <body style="background-color:#002130;">
-    <?php
+    <?php  include "Compo/DbConnect.php";
   include "Compo/Header.php";
-  include "Compo/DbConnect.php";
+
   ?>
     <?php
     $id=$_GET['Catid'];
@@ -39,10 +39,21 @@ if($method=='POST')
 {
     
  $ThTitle=$_POST['ProblemTitle'];
- $ThDesc=$_POST['Description'];
 
+ $ThTitle=str_replace("<","&lt;","$ThTitle");
+ $ThTitle=str_replace(">","&gt;","$ThTitle");
+ 
+
+ 
+ $ThDesc=$_POST['Description'];
+ $ThDesc=str_replace("<","&lt;","$ThDesc");
+ $ThDesc=str_replace(">","&gt;","$ThDesc");
+ 
+
+
+$Sno=$_POST['Sno'];
 $sql= "INSERT INTO `threads` ( `ThreadTitle`, `ThreadDesc`, `ThreadCatId`, `ThreadUserId`, `Dt`) VALUES 
-( '$ThTitle', ' $ThDesc', '$id', '0', CURRENT_TIMESTAMP);";
+( '$ThTitle', ' $ThDesc', '$id', '$Sno', CURRENT_TIMESTAMP);";
 $result=mysqli_query($conn,$sql);
 $showAlert =True;
 if($showAlert)
@@ -65,9 +76,7 @@ if($showAlert)
             <p>No Spam / Advertising / Self-promote in the forums. <br>
                 Do not cross post questions. <br>
                 Remain respectful of other members at all times. </p>
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-            </p>
+           
         </div>
     </div>
     <hr>
@@ -79,6 +88,7 @@ if($showAlert)
      if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true){
   echo  '<div class="container my-5 text-light">
    <center>
+   
             <H1 class="my-6rem"> Start a New Discussion </H1>
         </center>
         <form action='.$_SERVER["REQUEST_URI"].'  method="post">
@@ -92,6 +102,7 @@ if($showAlert)
             <div class="form-group">
                 <label for="Description">Elaborate Your Concern</label>
                 <textarea class="form-control" id="Description" name="Description" rows="6"></textarea>
+                <input type="hidden" name="Sno" value="'. $_SESSION['Sno'].'">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -126,11 +137,16 @@ $Title= $row['ThreadTitle'];
 $Desc= $row['ThreadDesc'];
 $Id=$row['ThreadId'];
 $Time=$row['Dt'];
+$UserID=$row['ThreadUserId'];
+
+$sql2="SELECT `Name` FROM `user` WHERE `Sno` = '$UserID'";
+$result2=mysqli_query($conn,$sql2);
+$row2=mysqli_fetch_assoc($result2);
 
 echo '       <div class="media my-4">
             <img class="mr-3 my-4" src="Images/user.png" width="80px" Height="80px" alt="Generic placeholder image">
             <div class="media-body my-4">
-            <p class="font-weight-bold my-0"> Anonymous User at '.$Time.' </p>
+            <p class="font-weight-bold my-0"> Asked by '.$row2['Name'].' at '.$Time.' </p>
                 <h5 class="mt-0"> <a href="Threads.php?ThreadId='.$Id.'">'.$Title.'</a></h5> 
                 '.$Desc.'
         

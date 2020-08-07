@@ -13,10 +13,10 @@
     <title>MY Forum</title>
 </head>
 
-<body>
-    <?php
+<body style="background-color:#002130;">
+    <?php include "Compo/DbConnect.php";
   include "Compo/Header.php";
-  include "Compo/DbConnect.php";
+ 
   ?>
     <?php
     $id=$_GET['ThreadId'];
@@ -27,7 +27,11 @@ while($row=mysqli_fetch_assoc($result))
 {
 $Title= $row['ThreadTitle'];
 $Description= $row['ThreadDesc'];
-
+$AskerId= $row['ThreadUserId'];
+$sql2="SELECT `Name` FROM `user` WHERE `Sno` = '$AskerId'";
+$result2=mysqli_query($conn,$sql2);
+$row2=mysqli_fetch_assoc($result2);
+$AskerName=$row2['Name'];
 }
 ?>
 
@@ -42,9 +46,13 @@ if($method=='POST')
 {
     
  $Comment=$_POST['Comment'];
+ $Comment=str_replace("<","&lt;","$Comment");
+ $Comment=str_replace(">","&gt;","$Comment");
+ 
+ $Sno=$_POST['Sno'];
 
  $sql="INSERT INTO `comments` ( `CommentUser`, `CommentContent`, `ThreadId`, `CommentTime`) 
- VALUES ( '0', '$Comment', '$id', CURRENT_TIMESTAMP);";
+ VALUES ( '$Sno', '$Comment', '$id', CURRENT_TIMESTAMP);";
  
  
  $result=mysqli_query($conn,$sql);
@@ -76,7 +84,7 @@ if($showAlert)
                 Do not cross post questions.
                 Remain respectful of other members at all times. </p>
             <p class="lead">
-            <p> <b> Posted by: ME </b> </p>
+            <p> <b> Asked by:<?php echo $AskerName; ?>  </b> </p>
             </p>
         </div>
 
@@ -87,8 +95,8 @@ if($showAlert)
 
  <?php 
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true){
-        echo  'echo 
-        <div class="container my-5">
+        echo  '
+        <div class="container my-5 text-light">
 
         <center>
             <H1 class="my-6rem"> Post Your Comment </H1>
@@ -99,6 +107,7 @@ if($showAlert)
             <div class="form-group">
                 <label for="Comment">Give Your Comment</label>
                 <textarea class="form-control" id="Comment" name="Comment" rows="6"></textarea>
+                <input type="hidden" name="Sno" value="'.$_SESSION["Sno"].'">
             </div>
 
             <button type="submit" class="btn btn-success">Submit</button>
@@ -106,7 +115,7 @@ if($showAlert)
     </div>';
 }
           else{
-             echo '<div class="container my-5 t">
+             echo '<div class="container my-5 text-light">
              <center>
                       <H1 class="my-6rem"> Post Your Comment </H1>
                   
@@ -116,7 +125,7 @@ if($showAlert)
     
     
     ?>
-    <div class="container">
+    <div class="container text-light">
 
         <H1 class="my-6rem"> Discussions </H1>
 
@@ -135,10 +144,18 @@ while($row=mysqli_fetch_assoc($result))
 $Content= $row['CommentContent'];
 $Id=$row['CommentId'];
 $Time=$row['CommentTime'];
+$UserId=$row['CommentUser'];
+
+
+$sql2="SELECT `Name` FROM `user` WHERE `Sno` = '$UserId'";
+$result2=mysqli_query($conn,$sql2);
+$row2=mysqli_fetch_assoc($result2);
+
+
 echo '       <div class="media my-4">
             <img class="mr-3 my-4" src="Images/user.png" width="80px" Height="80px" alt="Generic placeholder image">
             <div class="media-body my-4">
-            <p class="font-weight-bold my-0"> Anonymous User at '.$Time.' </p>
+            <p class="font-weight-bold my-0"> Comment by  '.$row2['Name'].' at '.$Time.' </p>
                 '.$Content.'
         
             </div>

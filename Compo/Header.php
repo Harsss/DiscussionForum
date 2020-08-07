@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 echo '<nav class="navbar navbar-expand-lg  navbar-dark bg-dark " style="min-height: 70px;">
   <a class="navbar-brand" href="/Forum">Navbar</a>
@@ -16,15 +17,23 @@ echo '<nav class="navbar navbar-expand-lg  navbar-dark bg-dark " style="min-heig
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+           Categories
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
+
+      
+      $sql="SELECT * FROM `categories`";
+      $result=mysqli_query($conn,$sql);
+
+      while($row=mysqli_fetch_assoc($result))
+    {
+         echo' <a class="dropdown-item" href="http://localhost/Forum/ThreadsList.php?%20Catid='.$row['CategoryId'].'">'.$row['CategoryName'].'</a>
+          ';
+         
+
+        }
+     echo '  </div>
+     </li>
       <li class="nav-item">
         <a class="nav-link " href="Contact.php">Contact</a>
        </li>
@@ -35,11 +44,14 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true ){
 // session_destroy();
 // exit();
 
- echo  '<form class="form-inline my-2 my-lg-0">
-  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+ echo  '<form class="form-inline my-2 my-lg-0" method="get" action="Search.php" >
+  <input class="form-control mr-sm-2" type="search" name="Search" placeholder="Search" aria-label="Search">
   <button class="btn btn-success my-2 my-sm-0" type="submit"> Submit </button>
   <p class=" mx-2 my-2 text-light"> Welcome '.$_SESSION['Name'].' </p>       
 </form>
+
+
+
 <a href="Compo/Logout.php" class="btn btn-outline-success ml-2"  >Logout</a> ';
 
 

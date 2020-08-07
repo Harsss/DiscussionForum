@@ -20,6 +20,7 @@ if(password_verify($Password,$row['PassHash']))
     $_SESSION['loggedin']=true;
     $_SESSION['EmailId']=$Email;
     $_SESSION['Name']=$Name;
+    $_SESSION['Sno']=$row['Sno'];
 
    echo "Logged in".$Email;
    header("location: /forum/index.php");

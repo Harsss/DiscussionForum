@@ -15,8 +15,9 @@
 
 <body style="background-color:#002130;">
     <?php
+    include "Compo/DbConnect.php";
   include "Compo/Header.php";
-  include "Compo/DbConnect.php";
+ 
   ?>
 
 
